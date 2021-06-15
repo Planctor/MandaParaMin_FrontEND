@@ -1,0 +1,731 @@
+@import "_cores.scss";
+@import "_fontes.scss";
+@import "_animacoes.scss";
+
+@mixin mobile {
+    @media only screen and (max-width:480px) {
+        @content;
+    }
+}
+
+@mixin tablet {
+    @media only screen and (max-width:955px) {
+        @content;
+    }
+}
+
+@mixin  notebook {
+    @media only screen and (max-width:1200px) {
+        @content;
+    }
+}
+
+@mixin flexCentro {
+    display: flex;
+    justify-content: center;
+}
+
+@mixin primeiroFilho {
+    &:first-child{
+        margin-left: 0;
+    }
+}
+
+@mixin sombra {
+    -webkit-box-shadow: -1px 9px 8px 0px rgba(0,0,0,0.10);
+    -moz-box-shadow: -1px 9px 8px 0px rgba(0,0,0,0.10);
+    box-shadow: -1px 9px 8px 0px rgba(0,0,0,0.10);
+}
+
+@mixin titulos {
+    font-family: $titulos;
+    color: $primaria;
+}
+
+@mixin texto {
+    font-family: $textos;
+    color: $secundaria;
+}
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 3fr 3fr 1fr;
+    grid-template-areas: "header header header header"
+    "slide slide slide slide"
+    "funciona funciona funciona funciona"
+    "somos somos somos somos"
+    "clientes clientes clientes clientes"
+    "blog blog blog blog"
+    "faq faq faq faq"
+    "simulador simulador simulador simulador"
+    "rodape rodape rodape rodape"
+    "direitos direitos direitos direitos";
+}
+
+header{
+    grid-area: header;
+    grid-column: 1/5;
+    align-items: center;
+    height: 64px;
+    z-index: 5;
+
+    //MENU RESPONSIVO
+    nav{
+        width: 100%;
+        position: fixed;
+        background-color: $neutra;
+        height: 64px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 100px;
+        z-index: 5;
+        @include sombra;
+        @include notebook{
+            padding: 0;
+        };
+
+        .logo{
+            img{
+                margin-top: 10px;
+                width: 250px;
+                cursor: pointer;
+                @include tablet{
+                    max-width: 150px;
+                    margin-left: 10%;
+                };
+            }
+        }
+        @include tablet{
+            ul.ativo{
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                background-color: $neutra;
+                position: absolute;
+                right: 0;
+                top: 64px;
+                height: 100vh;
+                width: 30%;
+                min-width: 300px;
+                box-shadow: inset -1px 9px 8px 0px rgba(0,0,0,0.10);
+                transition: .3;
+                animation: func_left .3s ease;
+            }
+        }
+
+        
+        ul{
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            @include tablet{
+                li.ativo{
+                    display: block;
+                    margin: 2em 0;
+                } 
+            }            
+            li{
+                list-style: none;
+                margin-left: 20px;
+                
+                @include tablet{
+                    display: none
+                };
+                @include primeiroFilho;
+                a{
+                    font-family: $botoes;
+                    text-decoration: none;
+                    color: $primaria;
+                    font-size: 1.1rem;
+                    letter-spacing: 2px;
+                    text-transform: capitalize;
+                    font-weight: 500;
+                    &:hover{
+                        transition: .5s;
+                        border-bottom: 1px solid $secundaria;
+                        color: $secundaria;
+                    }
+                }
+                .cadastro{
+                    color: $neutra;
+                    background-color: $primaria;
+                    padding: .8em 1em;
+                    border-radius: 5px;
+                    font-weight: 400;
+                    &:hover{
+                        transition: .5s;
+                        color: $neutra;
+                        background-color: $secundaria;
+                    }
+                }
+            }
+        }
+        .reponsivo{
+            display: none;
+            margin-right: 10px;
+            .mobile{
+                position: relative;
+                .menu.ativo:nth-child(1){
+                    position: absolute;
+                    top: -5px;
+                    right:5px;
+                    transform: rotate(-45deg);
+                    transition: .5s;
+                }
+                .menu.ativo:nth-child(2){
+                    display: none;
+                }
+                .menu.ativo:nth-child(3){
+                    position: absolute;
+                    top: -5px;
+                    right:5px;
+                    transform: rotate(45deg);
+                    transition: .5s;
+                }
+                .menu:nth-child(1){
+                    background-color: $primaria;
+                    width: 40px;
+                    height: 8px;
+                    cursor: pointer;
+                    border-radius: 2px;
+                    transition: .5s;
+                    position: absolute;
+                    top: -20px;
+                    right:5px;
+                    
+                    &:hover{
+                        border-bottom: none;
+                    }
+                }
+                .menu:nth-child(2){
+                    background-color: $primaria;
+                    width: 40px;
+                    height: 8px;
+                    cursor: pointer;
+                    border-radius: 2px;
+                    transition: .5s;
+                    position: absolute;
+                    top: -5px;
+                    right:5px;
+                    
+                    &:hover{
+                        border-bottom: none;
+                    }
+                }
+                .menu:nth-child(3){
+                    background-color: $primaria;
+                    width: 40px;
+                    height: 8px;
+                    cursor: pointer;
+                    border-radius: 2px;
+                    transition: .5s;
+                    position: absolute;
+                    top: 10px;
+                    right:5px;
+                    
+                    &:hover{
+                        border-bottom: none;
+                    }
+                }
+                
+            }
+            
+            @include tablet{
+                display: block;
+            }
+        }
+    }
+}
+      
+.slide{ 
+    grid-area: slide;
+    grid-column: 1/5;
+    background-color: $contraste;
+    width: 100%;
+    position: relative;
+    .glider{
+        overflow-x: hidden;
+        display: flex;
+        align-items: center;
+        height: 400px;
+        .principal{
+            padding: 0 200px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            @include notebook{
+                padding: 0 80px;
+            }
+            .textos{
+                max-width: 40%;
+                display: block;
+                @include tablet{
+                    padding: 0 10px;
+                    max-width: 100%;
+                }
+                @include mobile{
+                    padding: 0 10px;
+                }
+                h1{
+                    @include titulos;
+                    font-size: 42px;
+                    font-weight: 700;
+                    letter-spacing: 2px;
+                    @include mobile{
+                        font-size: 32px;
+                    }
+                }
+                p{
+                    @include texto;
+                    font-size: 18px;
+                    @include mobile{
+                        font-size: 14px;
+                    }
+                }
+            }
+            .svg{
+                img{
+                    max-width: 350px;
+                    @include notebook{
+                        max-width: 250px;
+                    }
+                    @include tablet{
+                        display: none;
+                    }
+                }
+            }
+            .dolar{
+                margin-top: 20px;
+                background-color: $primaria;
+                max-width: 40%;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding: .6em 1em;
+                border-radius: 5px;
+                @include mobile{
+                    margin-top: 30px;
+                    max-width: 50%;
+                }
+                span{
+                    @include texto;
+                    color: $neutra;
+                    font-weight: 200;
+                    font-size: 18px;
+                    &:first-child{
+                        @include titulos;
+                        color: $neutra
+                    }
+                    @include tablet{
+                        font-weight: 100;
+                        font-size: 14px;
+                    }
+                }
+            }
+        }
+        .foto{
+            img{
+                height: 100%;
+                width: 100%;
+            }
+        }
+    }
+    .glider-prev{
+        color: $secundaria;
+        position: absolute;
+        left: 3%;
+        top: 50%;
+    }
+    .glider-next{
+        color: $secundaria;
+        position: absolute;
+        right: 3%;
+        top: 50%;
+    }
+    .dots{
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+}
+
+.como_funciona{
+    grid-area: funciona;
+    grid-column: 1/5;
+    height: auto;
+    margin-top: 50px;
+    @include notebook{
+        grid-column: 1/5;
+        padding: 10px;
+    }
+    @include tablet{
+        height: 1550px;
+    }
+    
+    .titulo{
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        flex-wrap: wrap;
+        h2{
+            @include titulos; 
+            font-size: 36px;
+            letter-spacing: 1px;
+            text-transform: capitalize;
+            @include mobile{
+                font-size: 32px;
+            }
+        }
+        p{
+            @include texto;
+            font-size: 18px;
+            margin-top: 5px;
+            @include mobile{
+                font-size: 12px;
+            }
+        }
+    }
+    .btn a{
+        @include sombra;
+        border: 0;
+        text-decoration: none;
+        color: $neutra;
+        background-color: $primaria;
+        padding: .8em 1em;
+        border-radius: 5px;
+        font-weight: 400;
+        font-family: $botoes;
+        &:hover{
+            transition: .5s;
+            background-color: $secundaria;
+        }
+    }
+    .btn{
+        text-align: center;
+        margin-bottom: 5%;
+        @include tablet{
+            margin-top: 3%;
+        }
+        @include mobile{
+            margin-top: 15%;
+        }
+    }
+    .conteudo{
+        height: 400px;
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        @include tablet{
+            height: auto;
+            display: block;
+        }
+        .card{
+            margin-top: 80px;
+           padding: 1%;
+            .vector{
+                display: flex;
+                justify-content: space-between;
+                margin-left: 25%;
+                img{
+                    width: 150px;
+                    @include tablet{
+                        margin: 0 auto;
+                        transform: translateX(-60%);
+                    }
+                    @include mobile(){
+                        margin: 0 auto;
+                        transform: translateX(-25%);
+                    }
+                }
+            }
+            .conteudo{
+                display: block;
+                text-align: center;
+                margin-top: 25px;
+                h3{
+                    @include titulos;
+                    font-size: 1.6em;
+                    @include tablet{
+                        font-size: 1.5em;
+                    }
+                }
+                p{
+                    @include texto;
+                    font-size: 1em;
+                }
+            }
+        }
+    }
+}
+
+.quem_somos{
+    grid-area: somos;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    background-color: $contraste;
+    padding: 0 150px;
+    height: 500px;
+    @include notebook{
+        padding: 0 20px;
+        justify-content: center;
+    }
+    @include tablet{
+        height: auto;
+    }
+
+
+    .texto{
+        max-width: 450px;
+        @include notebook{
+            padding: 40px 20px;
+        }
+        @include mobile{
+            height: auto;
+            padding: 40px 0;
+        }
+        h1{
+            @include titulos;            
+            letter-spacing: 2px;
+            font-size: 32px;
+            @include tablet{
+                font-size: 28px;
+            }
+        }
+        p{
+            @include texto;
+            line-height: 25px;
+            font-size: 16px;
+            @include tablet{
+                font-size: 14px;
+                line-height: 20px;
+            }
+        }
+    }
+
+    .imagem{
+        img{
+            max-width: 400px;
+            @include tablet{
+                max-width: 300px;
+            }
+            @include mobile{
+                display: none;
+            }
+        }
+    }
+}
+
+.clientes{
+    grid-area: clientes;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    padding: 50px 0;
+    
+    h1{
+        @include titulos;
+        font-size: 36px;
+        letter-spacing: 1px;
+        text-transform: capitalize;
+        @include tablet{
+            font-size: 28px;
+        }
+    }
+
+    .telaCliente{
+        margin-top: 50px;
+        width: 100%; 
+    }
+    .a-box {
+        display: inline-block;
+        width: 240px;
+        text-align: center;
+        animation: func_left .5s ease-in-out;
+      } 
+    .img-container {
+        height: 230px;
+        width: 200px;
+        overflow: hidden;
+        border-radius: 0px 0px 20px 20px;
+        display: inline-block;
+    }
+    
+    .img-container img {
+        transform: skew(0deg, -13deg);
+        height: 250px;
+        margin: -35px 0px 0px -70px;
+        width: 150%;
+    }
+    
+    .inner-skew {
+        display: inline-block;
+        border-radius: 20px;
+        overflow: hidden;
+        padding: 0px;
+        transform: skew(0deg, 13deg);
+        font-size: 0px;
+        margin: 30px 0px 0px 0px;
+        background: #c8c2c2;
+        height: 250px;
+        width: 200px;
+    }
+    
+    .text-container {
+      box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.2);
+      padding: 120px 20px 20px 20px;
+      border-radius: 20px;
+      background: #fff;
+      margin: -120px 0px 0px 0px;
+      line-height: 19px;
+      font-size: 14px;
+      font-family: $textos;
+    }
+    
+    .text-container h3 {
+      margin: 20px 0px 10px 0px;
+      color:$primaria;
+      font-family: $titulos;
+      font-size: 18px;
+    }
+}
+
+footer{
+    grid-area: rodape;
+    padding: 0 100px;
+    background-color: $contraste;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    align-items: center;
+    height: 300px;
+    @include notebook{
+        padding: 0 10px;
+    }
+    @include tablet{
+        justify-content: center;
+    }
+    @include mobile{
+        height: auto;
+        padding: 40px 0; 
+    }
+
+    .conteudo{
+        img{
+            width: 250px;
+            @include mobile{
+                max-width: 100%;
+                padding: 0 20px;
+            }
+        }
+        p{
+            @include texto;
+            max-width: 300px;
+            @include mobile{
+                max-width: 100%;
+                padding: 0 20px;
+                font-size: 12px;
+            }
+        }
+    }
+
+    .redes{
+        h4{
+            @include titulos;
+            font-size: 24px;
+            letter-spacing: 2px;
+            @include mobile{
+                font-size: 16px;
+            }
+        }
+        .icones{
+            margin-right: 6em;
+            @include mobile{
+                width: 100%;
+            }
+            i{
+                cursor: pointer;
+                font-size: 30px;
+                padding: .4em .4em;
+                border-radius: 5px;
+                margin: 10px 10px 0 0;
+                background-color: $primaria;
+                color: $neutra;
+                &:hover{
+                    transition: .5s;
+                    background-color: $secundaria;
+                }
+                @include mobile{
+                    margin:  0;
+                    font-size: 15px;
+                }
+            }
+        }
+        @include tablet{
+            margin-top: 20px;
+            margin-left: 50px;
+        }
+        @include mobile{
+            max-width: 100%;
+        }
+    }
+}
+
+.direitos{
+    grid-area: direitos;
+    display: flex;
+    justify-content: center;
+    padding: 10px 0;
+    text-align: center;
+    @include texto;
+    p{
+        font-size: 12px;
+        @include mobile{
+            font-size: 12px;
+        }
+    }
+}
+
+.blog{
+    grid-area: blog;
+    grid-column: 1/5;
+    width: 100%;
+    height: auto;
+
+    img{
+        width: 100%;
+        height: 500px; 
+        padding: 5%; 
+    }
+}
+
+.faq{
+    grid-area: faq;
+    grid-column: 1/5;
+    width: 100%;
+    height: auto;
+
+    img{
+        width: 100%;
+        height: 500px; 
+        padding: 5%; 
+    }
+}
+
+.simulador{
+    grid-area: simulador;
+    grid-column: 1/5;
+    width: 100%;
+    height: auto;  
+}
